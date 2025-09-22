@@ -16,16 +16,19 @@ jobs:
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
     
+    - name: List available simulators
+      run: xcrun simctl list devices
+    
     - name: Build
       run: |
         xcodebuild -project attancde.xcodeproj \
                    -scheme attancde \
-                   -destination 'generic/platform=iOS Simulator' \
+                   -destination 'platform=iOS Simulator,name=iPhone 15' \
                    clean build
     
     - name: Test
       run: |
         xcodebuild -project attancde.xcodeproj \
                    -scheme attancde \
-                   -destination 'generic/platform=iOS Simulator' \
+                   -destination 'platform=iOS Simulator,name=iPhone 15' \
                    test
